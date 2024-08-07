@@ -2,8 +2,10 @@
     <x-page-heading>Results for "{{ $query }}"</x-page-heading>
 
     <div class="space-y-6">
-        @foreach($jobs as $job)
+        @forelse($jobs as $job)
             <x-job-card-wide :$job />
-        @endforeach
+        @empty
+            <p class="text-center">No jobs found.</p>
+        @endforelse
     </div>
 </x-layout>
