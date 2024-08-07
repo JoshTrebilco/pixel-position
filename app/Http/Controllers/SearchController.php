@@ -7,13 +7,19 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Request $request)
     {
+        $request->validate([
+            'q' => ['required', 'string'],
+        ]);
+
+        $query = request('q');
+
         $jobs = Job::query()
             ->with(['employer', 'tags'])
-            ->where('title', 'LIKE', '%'.request('q').'%')
+            ->where('title', 'LIKE', '%'.$query.'%')
             ->get();
 
-        return view('results', ['jobs' => $jobs]);
+        return view('results', ['jobs' => $jobs, 'query' => $query]);
     }
 }
