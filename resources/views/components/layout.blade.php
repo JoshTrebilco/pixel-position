@@ -18,13 +18,13 @@
     <div class="px-10">
         <nav class="flex justify-between items-center py-4 border-b border-white/10">
             <div>
-                <a href="/">
+                <a href="{{ route('home') }}">
                     <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="">
                 </a>
             </div>
 
             <div class="space-x-6 font-bold">
-                <a href="/">Jobs</a>
+                <a href="{{ route('home') }}">Jobs</a>
                 <a href="#">Careers</a>
                 <a href="#">Salaries</a>
                 <a href="#">Companies</a>
@@ -32,9 +32,9 @@
 
             @auth
                 <div class="space-x-6 font-bold flex">
-                    <a href="/jobs/create">Post a Job</a>
+                    <a href="{{ route('jobs.create') }}">Post a Job</a>
 
-                    <form method="POST" action="/logout">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         @method('DELETE')
 
@@ -45,8 +45,8 @@
 
             @guest
                 <div class="space-x-6 font-bold">
-                    <a href="/register">Sign Up</a>
-                    <a href="/login">Log In</a>
+                    <a href="{{ route('register') }}">Sign Up</a>
+                    <a href="{{ route('login') }}">Log In</a>
                 </div>
             @endguest
         </nav>
