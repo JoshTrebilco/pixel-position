@@ -24,7 +24,7 @@ class JobController extends Controller
         $jobs = Job::latest()
             ->with(['employer', 'tags'])
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(3);
 
         return view('jobs.index', [
             'jobs' => $jobs,

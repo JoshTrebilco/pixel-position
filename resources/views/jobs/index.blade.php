@@ -36,6 +36,10 @@
                     <x-job-card-wide :$job />
                 @endforeach
             </div>
+
+            <div class="mt-6">
+                {{ $jobs->links() }}
+            </div>
         </section>
     </div>
 </x-layout>
