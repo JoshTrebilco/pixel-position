@@ -11,6 +11,11 @@ class Job extends Model
 {
     use HasFactory;
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function tag(string $name): void
     {
         $tag = Tag::firstOrCreate(['name' => strtolower($name)]);
