@@ -123,4 +123,14 @@ class JobController extends Controller
 
         return redirect(route('jobs.show', $job));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Job $job)
+    {
+        $job->delete();
+
+        return redirect()->route('home');
+    }
 }

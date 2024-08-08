@@ -30,8 +30,25 @@
                 <x-tag :$tag size="small" class="bg-blue-500 text-white" />
             @endforeach
         </div>
+
+        <div class="mt-6 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                @can('delete', $job)
+                <x-forms.form method="POST" action="{{ route('jobs.destroy', $job) }}">
+                    @csrf
+                    @method('DELETE')
+
+                    <x-forms.button class="border-red-600 border-2 bg-transparent text-white">Delete</x-forms.button>
+                </x-forms.form>
+                @endcan
+
                 @can('update', $job)
                 <a href="{{ route('jobs.edit', $job) }}" class="text-blue-400 hover:underline">Edit</a>
                 @endcan
+            </div>
+            <div>
+                <a href="{{ route('home') }}" class="text-blue-400 hover:underline">Back to Listings</a>
+            </div>
+        </div>
     </div>
 </x-layout>
