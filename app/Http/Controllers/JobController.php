@@ -53,6 +53,7 @@ class JobController extends Controller
             'schedule' => ['required', Rule::in(['Part Time', 'Full Time'])],
             'url' => ['required', 'active_url'],
             'tags' => ['nullable'],
+            'description' => ['required'],
         ]);
 
         $attributes['featured'] = $request->has('featured');

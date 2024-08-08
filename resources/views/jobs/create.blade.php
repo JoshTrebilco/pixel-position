@@ -5,6 +5,7 @@
         <x-forms.input label="Title" name="title" placeholder="CEO" />
         <x-forms.input label="Salary" name="salary" placeholder="$90,000 USD" />
         <x-forms.input label="Location" name="location" placeholder="Winter Park, Florida" />
+        <x-forms.textarea label="Description" name="description" placeholder="We're looking for a CEO to lead our company into the future." />
 
         <x-forms.select label="Schedule" name="schedule">
             <option>Part Time</option>
