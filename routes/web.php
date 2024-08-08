@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JobController::class, 'index'])->name('home');
 
-Route::get('/jobs/create', [JobController::class, 'create'])->middleware('auth')->name('jobs.create');
-Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
-Route::post('/jobs', [JobController::class, 'store'])->middleware('auth')->name('jobs.store');
-Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->middleware('auth')->name('jobs.edit');
-Route::put('/jobs/{job}', [JobController::class, 'update'])->middleware('auth')->name('jobs.update');
-Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->middleware('auth')->name('jobs.destroy');
+Route::resource('jobs', JobController::class)->middleware('auth');
 
 Route::get('/search', SearchController::class)->name('search');
 Route::get('/tags/{tag:name}', TagController::class)->name('tags.show');
