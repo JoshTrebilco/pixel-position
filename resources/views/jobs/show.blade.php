@@ -30,5 +30,8 @@
                 <x-tag :$tag size="small" class="bg-blue-500 text-white" />
             @endforeach
         </div>
+                @can('update', $job)
+                <a href="{{ route('jobs.edit', $job) }}" class="text-blue-400 hover:underline">Edit</a>
+                @endcan
     </div>
 </x-layout>

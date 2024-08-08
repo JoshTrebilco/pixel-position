@@ -65,7 +65,7 @@ class JobController extends Controller
 
         if ($attributes['tags'] ?? false) {
             foreach (explode(',', $attributes['tags']) as $tag) {
-                $job->tag($tag);
+                $job->tag(Str::trim($tag));
             }
         }
 
@@ -80,5 +80,47 @@ class JobController extends Controller
         return view('jobs.show', [
             'job' => $job->load(['employer', 'tags']),
         ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Job $job)
+    {
+        return view('jobs.edit', [
+            'job' => $job->load('tags'),
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Job $job)
+    {
+        $attributes = $request->validate([
+            'title' => ['required'],
+            'salary' => ['required'],
+            'location' => ['required'],
+            'schedule' => ['required', Rule::in(['Part Time', 'Full Time'])],
+            'url' => ['required', 'active_url'],
+            'tags' => ['nullable'],
+            'description' => ['required'],
+        ]);
+
+        $attributes['featured'] = $request->has('featured');
+
+        $attributes['slug'] = Str::slug($attributes['title']);
+
+        $job->update(Arr::except($attributes, 'tags'));
+
+        $job->removeTags();
+
+        if ($attributes['tags'] ?? false) {
+            foreach (explode(',', $attributes['tags']) as $tag) {
+                $job->tag(Str::trim($tag));
+            }
+        }
+
+        return redirect(route('jobs.show', $job));
     }
 }

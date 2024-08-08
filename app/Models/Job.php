@@ -18,6 +18,11 @@ class Job extends Model
         $this->tags()->attach($tag);
     }
 
+    public function removeTags(): void
+    {
+        $this->tags()->detach();
+    }
+
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
