@@ -71,4 +71,14 @@ class JobController extends Controller
 
         return redirect('/');
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Job $job)
+    {
+        return view('jobs.show', [
+            'job' => $job->load(['employer', 'tags']),
+        ]);
+    }
 }
