@@ -7,6 +7,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class JobController extends Controller
@@ -57,6 +58,8 @@ class JobController extends Controller
         ]);
 
         $attributes['featured'] = $request->has('featured');
+
+        $attributes['slug'] = Str::slug($attributes['title']);
 
         $job = Auth::user()->employer->jobs()->create(Arr::except($attributes, 'tags'));
 
