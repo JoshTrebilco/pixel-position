@@ -8,4 +8,8 @@
             <p class="text-center">No jobs found.</p>
         @endforelse
     </div>
+
+    <div class="mt-6">
+        {{ $jobs->links() }}
+    </div>
 </x-layout>

@@ -18,7 +18,8 @@ class SearchController extends Controller
         $jobs = Job::query()
             ->with(['employer', 'tags'])
             ->where('title', 'LIKE', '%'.$query.'%')
-            ->get();
+            ->paginate(3)
+            ->withQueryString();
 
         return view('results', ['jobs' => $jobs, 'query' => $query]);
     }
