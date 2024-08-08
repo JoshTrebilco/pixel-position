@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Job;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class JobPolicy
 {
@@ -13,7 +12,7 @@ class JobPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +20,7 @@ class JobPolicy
      */
     public function view(User $user, Job $job): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +28,7 @@ class JobPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +36,7 @@ class JobPolicy
      */
     public function update(User $user, Job $job): bool
     {
-        //
+        return $user->id === $job->employer->user_id;
     }
 
     /**
@@ -45,22 +44,6 @@ class JobPolicy
      */
     public function delete(User $user, Job $job): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Job $job): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Job $job): bool
-    {
-        //
+        return $user->id === $job->employer->user_id;
     }
 }
