@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\JobCreatedAction;
 use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class JobController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, JobCreatedAction $jobCreatedAction)
     {
         $attributes = $request->validate([
             'title' => ['required'],
@@ -68,6 +69,9 @@ class JobController extends Controller
                 $job->tag(Str::trim($tag));
             }
         }
+
+        // Execute the invokable action to send emails to all users
+        $jobCreatedAction($job);
 
         return redirect('/');
     }
