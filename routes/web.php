@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [JobController::class, 'index'])->name('home');
 
 Route::resource('jobs', JobController::class)->middleware('auth');
+Route::get('/jobs/{job}/email', [JobController::class, 'email'])->name('jobs.email');
 
 Route::get('/search', SearchController::class)->name('search');
 Route::get('/tags/{tag:name}', TagController::class)->name('tags.show');

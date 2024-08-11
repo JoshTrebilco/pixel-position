@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\JobCreatedAction;
+use App\Mail\JobPosted;
 use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -136,5 +137,13 @@ class JobController extends Controller
         $job->delete();
 
         return redirect()->route('home');
+    }
+
+    /**
+     * Preview the email that will be sent to all users.
+     */
+    public function email(Job $job)
+    {
+        return new JobPosted($job);
     }
 }
