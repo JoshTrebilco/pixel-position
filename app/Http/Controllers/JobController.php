@@ -9,6 +9,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -92,6 +93,8 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
+        Gate::authorize('update', $job);
+
         return view('jobs.edit', [
             'job' => $job->load('tags'),
         ]);
@@ -102,6 +105,8 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
+        Gate::authorize('update', $job);
+
         $attributes = $request->validate([
             'title' => ['required'],
             'salary' => ['required'],
@@ -134,6 +139,8 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
+        Gate::authorize('delete', $job);
+
         $job->delete();
 
         return redirect()->route('home');
